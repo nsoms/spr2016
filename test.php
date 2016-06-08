@@ -6,17 +6,20 @@ include (ROOT . "classes/helpers.php");
 include (ROOT . "classes/html.php");
 include (ROOT . "classes/session.php");
 require_once (ROOT . "classes/db.php");
+require_once (ROOT . "classes/user.php");
 
 Session::start_session();
 
-Session::set("mama", "woman");
-Session::set("pap", "man");
+HTML::header("Страница");
 
-HTML::header("Страница1");
+$login = get_or_post('login');
+$passwd = get_or_post('passwd');
+if ($login !== null && $passwd !== null) {
+    $user->authorize($login, $passwd);
+}
 
-$x = get_or_post('x', "");
-$y = get_or_post('y', "");
-
+if (!$user->is_auth())
+    HTML::template("login", array($login));
 
 HTML::template("form", array($x, $y));
 HTML::template("test", array($x / 2, $y / 2));

@@ -26,17 +26,44 @@ class DB {
             pg_close($this->conn);
     }
 
-    function get_test() {
-        $resource = pg_query(
-            $this->conn,
-            "SELECT * FROM test"
-        );
+    function one_row($resource) {
+        if ($resource === false)
+            die("Все плохо: " . pg_last_error($this->conn));
+        $res = pg_fetch_assoc($resource);
+        return ($res === false ? null : $res);
+    }
+
+    function all_rows($resource) {
         if ($resource === false)
             die("Все плохо: " . pg_last_error($this->conn));
         $res = array();
         while (($row = pg_fetch_assoc($resource)) !== false)
             $res[] = $row;
         return $res;
+    }
+
+    function get_test() {
+        $resource = pg_query(
+            $this->conn,
+            "SELECT * FROM test"
+        );
+        return $this->all_rows($resource);
+    }
+
+    function check_auth($login, $passwd) {
+        $resource = pg_query_params(
+            $this->conn,
+            "SELECT 
+                id, login, 
+                name,        
+                email,       
+                reg_date,    
+                last_login 
+            FROM users WHERE 
+                login=$1 AND passwd=$2 AND NOT disabled",
+            array($login, $passwd)
+        );
+        return $this->one_row($resource);
     }
 };
 

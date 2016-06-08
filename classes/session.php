@@ -40,6 +40,8 @@ class Session {
     }
 
     static public function set($name, $value) {
+        if (Session::$started === false)
+            return;
         Session::$data[$name] = $value;
     }
 
