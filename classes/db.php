@@ -26,6 +26,13 @@ class DB {
             pg_close($this->conn);
     }
 
+    function one_val($resource) {
+        if ($resource === false)
+            die("Все плохо: " . pg_last_error($this->conn));
+        $res = pg_fetch_array($resource);
+        return ($res === false ? null : $res[0]);
+    }
+
     function one_row($resource) {
         if ($resource === false)
             die("Все плохо: " . pg_last_error($this->conn));
@@ -64,6 +71,15 @@ class DB {
             array($login, $passwd)
         );
         return $this->one_row($resource);
+    }
+
+    function user_update($id, $name, $email) {
+        $resource = pg_query_params(
+            $this->conn,
+            "SELECT * FROM update_user($1, $2, $3)",
+            array($id, $name, $email)
+        );
+        return $this->one_val($resource);
     }
 };
 

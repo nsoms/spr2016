@@ -21,6 +21,10 @@ if ($login !== null && $passwd !== null) {
 if (!$user->is_auth())
     HTML::template("login", array($login));
 
+$res = $db->user_update(2, "test", "aaa");
+
+var_dump($res);
+
 HTML::template("form", array($x, $y));
 HTML::template("test", array($x / 2, $y / 2));
 
