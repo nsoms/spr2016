@@ -65,3 +65,5 @@ class User {
 }
 
 $user = new User();
+
+date();
