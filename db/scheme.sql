@@ -1,3 +1,5 @@
+CREATE LANGUAGE plpgsql;
+
 SELECT 'Drop table test if exists';
 DROP TABLE IF EXISTS test;
 

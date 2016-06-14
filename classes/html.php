@@ -38,8 +38,11 @@ class HTML {
         HTML::template("header", array($title));
     }
 
-    static public function footer() {
+    /**
+     */
+    static public function footer($aaa) {
         HTML::template("footer");
+        return $aaa;
     }
 
     static function template($name, $args = array()) {
