@@ -7,6 +7,7 @@ list( $title ) = $args;
         echo $title;
         ?></title>
     <?php
+    HTML::put_css();
     HTML::put_js();
     ?>
 </head>

@@ -81,6 +81,15 @@ class DB {
         );
         return $this->one_val($resource);
     }
+
+    function register_user($login, $passwd) {
+        $resource = pg_query_params(
+            $this->conn,
+            "SELECT * FROM register_user($1, $2)",
+            array($login, $passwd)
+        );
+        return $this->one_val($resource);
+    }
 };
 
 $db = new DB("dbname=mult user=mult");

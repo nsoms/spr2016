@@ -1,0 +1,25 @@
+form {
+  border: 2px dotted red;
+  border-radius: 50px; }
+  form label {
+    width: 50%;
+    display: inline-block;
+    padding: 10px 5px 10px 5px;
+    margin: 10px 5px 10px 5px; }
+  form input[type=submit] {
+    margin: auto;
+    display: block; }
+  form.login_form {
+    background-color: aqua; }
+
+input {
+  border-radius: 3px;
+  border: solid 1px darkgray;
+  box-shadow: 0px 4px 5px #666, 2px 6px 10px #999; }
+
+input:hover {
+  box-shadow: 0px 1px 2px #586626, 1px 3px 5px #faf436;
+  transform: rotate(270deg);
+  transition: 5; }
+
+/*# sourceMappingURL=all.css.map */

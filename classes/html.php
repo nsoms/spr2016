@@ -24,6 +24,7 @@ class HTML {
     static $sitename = "MySite";
     static $templates = [];
     static $js = [];
+    static $css = [];
     static $templates_dir = "/templates/";
 
     /**
@@ -70,11 +71,23 @@ class HTML {
         HTML::$js[] = $name;
     }
 
+    static function include_css($name) {
+        HTML::$css[] = $name;
+    }
+
     static function put_js() {
         HTML::$js = array_unique(HTML::$js);
         foreach (HTML::$js as $name) {
             echo "<script type='text/javascript' " .
                 "src='js/" . $name . "'></script>";
+        }
+    }
+
+    static function put_css() {
+        HTML::$css = array_unique(HTML::$css);
+        foreach (HTML::$css as $name) {
+            echo "<link rel='stylesheet' ".
+                "href='styles/" . $name . "' />";
         }
     }
 
